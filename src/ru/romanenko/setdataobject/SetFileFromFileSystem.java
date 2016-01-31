@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.TreeSet;
 
 import ru.romanenko.dataobject.File;
 
@@ -74,16 +76,23 @@ public class SetFileFromFileSystem {
 			String firstPartString;
 			String secondPartString;
 			String outString;
+			Set<String> result = new TreeSet<String>();
 			while (listF.size() >= index) {
 				firstPartString = listF.get(index - 1).substring(0, 12);
 				secondPartString = listF.get(index - 1).substring(20, 32);
+				result.add(firstPartString);
+				result.add(secondPartString);
+				/*
 				outString = secondPartString + "\r\n" + firstPartString
 						+ "\r\n";
 
 				insert(outFilePath, 0, outString.getBytes());
 				// System.out.println(secondPartString);
 				// System.out.println(firstPartString);
-				index = index + 5;
+				index = index + 5;*/
+			}
+			for (String str : result) {
+				insert(outFilePath, 0, str.getBytes());
 			}
 
 		} catch (IOException e) {
